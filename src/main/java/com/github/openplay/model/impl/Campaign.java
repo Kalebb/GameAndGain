@@ -8,8 +8,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.eclipse.persistence.sessions.Project;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -19,7 +17,6 @@ import com.github.openplay.model.impl.Interest;
 import com.github.openplay.model.impl.CampaignStates;
 import com.github.openplay.model.impl.CampaignTypes;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -32,58 +29,58 @@ public class Campaign implements CampaignInterface {
 	@Id
 	@Column(name="campaignsId")
 	@GeneratedValue
-	private int campaignsId;
+	public int campaignsId;
 	
 	@NotEmpty
 	@Column(name="name")
 	@Size(min=4, max=70)
-	private String name;
+	public String name;
 	
 	@NotEmpty
 	@Column(name="description")
 	@Size(min=4, max=300)
-	private String description;
+	public String description;
 	
 	@Column(name="maxScore")
 	private Integer maxScore;
 	
-	@NotNull
 	@Past
 	@Column(name="startDate")
 	@DateTimeFormat(pattern="MM/dd/yyyy")
-	private Date startDate;
+	public Date startDate;
 	
-	@NotNull
 	@Past
 	@Column(name="endDate")
 	@DateTimeFormat(pattern="MM/dd/yyyy")
-	private Date endDate;
+	public Date endDate;
 
 	// Foreign keys association
 	@NotNull
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="campaign_States_Campaign_StateId")
-	private CampaignStates campaignState;
+	public CampaignStates campaignState;
 	
 	@NotNull
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="campaign_Types_Campaign_TypeId")
-	private CampaignTypes campaignType;
+	public CampaignTypes campaignType;
 	
 	@NotNull
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="users_userId")
-	private User users;
+	public User users;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "campaign")
 	private Set<Mission>mission= new HashSet<Mission>(0);
-	// @NotNull
-	// private Project project
+	
+//	 @NotNull
+//	 @ManyToOne(cascade=CascadeType.ALL)
+//	 public Project project;
 	
 	@NotNull
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="interests_InterestId")
-	private Interest interest;
+	public Interest interest;
 
 	// Missing Foreign keys and foreign keys methods
 
@@ -189,6 +186,11 @@ public class Campaign implements CampaignInterface {
 
 	public void setMission(Set<Mission> mission){
 		this.mission = mission;
+	}
+
+	public void setCampaignType(CampaignTypes type) {
+		// TODO Auto-generated method stub
+		this.campaignType= type;
 	}
 
 }
