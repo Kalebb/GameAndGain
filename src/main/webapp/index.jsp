@@ -10,6 +10,10 @@
 			<a class="access_menu-link" href="webapi/adminResource/signup">Signup</a>
 			<a class="access_menu-link" href="webapi/adminResource/login">Login</a>
 			<a class="access_menu-link" href="webapi/adminResource/temporalComment">Comentario</a>
+			<a class="access_menu-link" href="webapi/campaignResource/campaigns">Campaign</a>
+			<a class="access_menu-link" href="webapi/missionResource/missions">Mission</a>
+			<a class="access_menu-link" href="webapi/questionResource/questions">Question</a>
+			<a class="access_menu-link" href="webapi/answerResource/answers">Answer</a>
 		</div>
 		<div class="logo_header">
 			<section class="logo_title"></section>
